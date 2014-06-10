@@ -1,8 +1,14 @@
-var express = require('express'),
-    get = require('http').get,
-    cheerio = require('cheerio');
+var express     = require('express'),
+    get         = require('http').get,
+    nunjucks    = require('nunjucks'),
+    cheerio     = require('cheerio');
 
 var app = express();
+
+nunjucks.configure('views', {
+    autoescape  : true,
+    express     : app
+});
 
 var options = {
   hostname: 'netcom.no',
@@ -13,7 +19,7 @@ var options = {
 var getDataAndRenew = function(data) {
 }
 
-get(options, function(response) {
+var hent = get(options, function(response) {
     var body = "";
     response.on('data', function(chunk) {
         body += chunk;
@@ -32,7 +38,12 @@ get(options, function(response) {
 
 
 app.get('/', function(req, res) {
-    res.send("Hello World");
+    res.render('index.html', {
+        title: "Kvotestatus",
+        data: "199 GB",
+        renew: "21.06.2014 00:00"
+    });
+    hent;
 });
 
 app.listen(3000);
