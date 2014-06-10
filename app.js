@@ -19,7 +19,7 @@ var options = {
 var getDataAndRenew = function(data) {
 }
 
-var hent = get(options, function(response) {
+get(options, function(response) {
     var body = "";
     response.on('data', function(chunk) {
         body += chunk;
@@ -43,7 +43,6 @@ app.get('/', function(req, res) {
         data: "199 GB",
         renew: "21.06.2014 00:00"
     });
-    hent;
 });
 
 app.listen(3000);
