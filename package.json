@@ -1,0 +1,30 @@
+{
+  "name": "netcom-kvote",
+  "description": "Little daemon that serves a webpage with the amout of data that is left for a Netcom Mobile Broadband connection.",
+  "version": "0.0.1",
+  "maintainers": [
+    {
+      "name": "Kristoffer Dalby",
+      "email": "kradalby@kradalby.no",
+      "web": "https://kradalby.no"
+    }
+  ],
+  "dependencies": {
+    "express": "4.4.2",
+    "cheerio": "0.16.0",
+    "nunjucks": "1.0.5"
+  },
+  "repositories": [
+    {
+      "type": "git",
+      "url": "git@github.com:kradalby/netcom-kvote.git"
+    }
+  ],
+  "licenses": [
+    {
+      "name": "",
+      "url": ""
+    }
+  ],
+  "homepage": "https://github.com/kradalby/netcom-kvote"
+}
