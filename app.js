@@ -10,13 +10,16 @@ nunjucks.configure('views', {
     express     : app
 });
 
+var left = "";
+var date = "";
+
 var options = {
   hostname: 'netcom.no',
   port: 80,
   path: '/kvotestatus/redirectpage.html'
 };
 
-var callBack = function(err, data) {
+function formatUsageData(err, data) {
     if(err) {
         console.log(err);
         return
@@ -24,13 +27,13 @@ var callBack = function(err, data) {
     
     $ = cheerio.load(data);
     var section = $('.section')[1];
-    var left = section.children[0].data.match(/[0-9]{0,3},[0-9]{0,3}\sGB/)[0];
-    var date = section.children[3].children[0].data.match(/[0-9]{2}.[0-9]{2}.[0-9]{4}\s[0-9]{2}.[0-9]{2}/)[0];
+    left = section.children[0].data.match(/[0-9]{0,3},[0-9]{0,3}/)[0];
+    date = section.children[3].children[0].data.match(/[0-9]{2}.[0-9]{2}.[0-9]{4}\s[0-9]{2}.[0-9]{2}/)[0];
     console.log(left, date);    
 
 }
 
-var getData = function(options, callback) {
+function getUsageData(options, callback) {
 
     get(options, function(response) {
         var body = "";
@@ -53,13 +56,13 @@ var getData = function(options, callback) {
 
 
 app.get('/', function(req, res) {
+    getUsageData(options, formatUsageData);
     res.render('index.html', {
         title: "Kvotestatus",
-        data: "199 GB",
-        renew: "21.06.2014 00:00"
+        data: left.slice(0,5) + " GB",
+        renew: date
     });
 });
 
 app.listen(3000);
 
-getData(options, callBack);
