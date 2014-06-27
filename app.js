@@ -32,12 +32,10 @@ function formatUsageData(err, data, callback2) {
     
     $ = cheerio.load(data);
     var section = $('.section')[1];
-    //left = section.children[0].data.match(/[0-9]{0,3},[0-9]{0,3}/)[0];
-    //date = section.children[3].children[0].data.match(/[0-9]{2}.[0-9]{2}.[0-9]{4}\s[0-9]{2}.[0-9]{2}/)[0];
-    left = "199,555";
-    date = "2345iasdf";
-    lastUpdate = moment().format("DD/MM/YYYY HH:mm:ss");
-    console.log(left, date, lastUpdate, moment.lang());    
+    left = section.children[0].data.match(/[0-9]{0,3},[0-9]{0,3}/)[0];
+    date = section.children[3].children[0].data.match(/[0-9]{2}.[0-9]{2}.[0-9]{4}\s[0-9]{2}.[0-9]{2}/)[0];
+    lastUpdate = moment().format("DD.MM.YYYY HH:mm:ss");
+    console.log(left, date, lastUpdate);    
     callback2();
 
 }
@@ -70,7 +68,7 @@ app.get('/', function(req, res) {
             title: "Kvotestatus",
             data: left.slice(0,5) + " GB",
             lastUpdate: lastUpdate,
-            renew: date
+            renew: date + ":00"
         });
     });
 });

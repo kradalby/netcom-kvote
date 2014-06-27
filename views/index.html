@@ -16,13 +16,16 @@
             font-size: 50px;
             margin: 0 0 0 0;
         }
+        span {
+            float: right;            
+        }
     </style>
 
     <title>{{ title }}</title>
   </head>
   <body>
     <h1>{{ data }}</h1>
-    <h3>Oppdatert: {{ lastUpdate }}</h3>
-    <h2>Fornyes: {{ renew }}</h2>
+    <h3>Oppdatert: <span>{{ lastUpdate }}</span></h3>
+    <h3>Fornyes: <span>{{ renew }}</span></h3>
   </body>
 </html>
