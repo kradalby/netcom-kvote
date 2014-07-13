@@ -2,13 +2,14 @@ var express     = require('express'),
     get         = require('http').get,
     nunjucks    = require('nunjucks'),
     moment      = require('moment'),
+    path        = require( "path" ),
     cheerio     = require('cheerio');
 
 var app = express();
 
 moment.lang('nb');
 
-nunjucks.configure('views', {
+nunjucks.configure(path.join(__dirname, 'views'), {
     autoescape  : true,
     express     : app
 });
@@ -73,5 +74,5 @@ app.get('/', function(req, res) {
     });
 });
 
-app.listen(3000);
+app.listen(3000, '127.0.0.1');
 
