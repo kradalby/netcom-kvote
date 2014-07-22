@@ -16,8 +16,17 @@
             font-size: 50px;
             margin: 0 0 0 0;
         }
+        h4 {
+            font-size: 35px;
+            margin: 0 30px 0 0;
+        }
         span {
             float: right;            
+        }
+
+        .table-cell {
+            font-size: 30px;
+            width: 50%;
         }
     </style>
 
@@ -27,5 +36,19 @@
     <h1>{{ data }}</h1>
     <h3>Oppdatert: <span>{{ lastUpdate }}</span></h3>
     <h3>Fornyes: <span>{{ renew }}</span></h3>
+    <br>
+    <br>
+    <br>
+    <br>
+    <h3>Historikk:</h3>
+    <table>
+        <tr><th><h4>Data</h4></th><th><h4>Dato</h4></th></tr>
+        {% for date, left in history %}
+            <tr>
+                <td class="table-cell">{{ left }} GB</td>
+                <td class="table-cell">{{ date }}</td>
+            </tr>
+        {% endfor %}
+    </table>
   </body>
 </html>

@@ -18,6 +18,15 @@ var left = "";
 var date = "";
 var lastUpdate = "";
 
+var history = new Array();
+
+function updateHistory(date , left) {
+    history.unshift([date, left]);
+
+    if (history.length >= 6) {
+        history = history.splice(0,7);
+    }
+}
 
 var options = {
   hostname: 'netcom.no',
@@ -69,8 +78,10 @@ app.get('/', function(req, res) {
             title: "Kvotestatus",
             data: left.slice(0,5) + " GB",
             lastUpdate: lastUpdate,
-            renew: date + ":00"
+            renew: date + ":00",
+            history: history
         });
+        updateHistory(lastUpdate, left);
     });
 });
 
